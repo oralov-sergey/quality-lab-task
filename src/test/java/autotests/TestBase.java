@@ -1,28 +1,37 @@
 package autotests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.junit5.BrowserPerTestStrategyExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
+
 
 public class TestBase {
-  protected WebDriver driver;
+   public LoginPage loginpage;
+
+
 
     @BeforeEach
-    void initWebDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        //    new ChromeOptions().addArguments("--window-size=500,500");
-        //    driver.manage().window().setSize(new Dimension(200, 100));
-        //   driver.get("https://tt-develop.quality-lab.ru");
-        driver.manage().window().maximize();
+    void initBrowser() {
+        Configuration.startMaximized = true;
+        this.loginpage = new LoginPage();
+
+     //   WebDriverRunner.clearBrowserCache();
+
+
+
+
     }
 
     @AfterEach
-    void closeWebDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
+    void closeWebDrive() {
+    WebDriverRunner.closeWebDriver();
     }
 }

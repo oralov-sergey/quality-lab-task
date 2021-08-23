@@ -1,50 +1,51 @@
 package autotests;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.*;
+import ru.yandex.qatools.htmlelements.element.TextBlock;
 
+
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class LoginNegativeTest extends TestBase {
-
-    final String URL = "https://tt-develop.quality-lab.ru";
-    final String USER_FIELD_LOCATOR = "//input[@id='username']";
-    final String USER = "TestUser";
-    final String PASSWORD = "Password";
-    final String PASSWORD_FIELD_LOCATOR = "//input[@name='_password']";
-    final String LOG_IN_BUTTON_LOCATOR = "//input[@value='Войти']";
-    public final String MESSAGE_LOCATOR = "(//div[contains(.,'Invalid credentials.')])[8]";
+    private final TextBlock MESSAGE_LOCATOR = new TextBlock($x("(//div[contains(.,'Invalid credentials.')])[8]"));
 
     @Test
     void incorrectUserNameAndPassword() {
-        driver.get(URL);
-        driver.findElement(By.xpath(USER_FIELD_LOCATOR)).sendKeys(USER);
-        driver.findElement(By.xpath(PASSWORD_FIELD_LOCATOR)).sendKeys(PASSWORD);
-        assertThrows(NoSuchElementException.class, () -> {
-            driver.findElement(By.xpath(MESSAGE_LOCATOR));
-        });
-        driver.findElement(By.xpath(LOG_IN_BUTTON_LOCATOR)).click();
+
+        loginpage.openWebSite()
+                .enterName(loginpage.INCORRECT_USER_NAME)
+                .enterPassword(loginpage.INCORRECT_PASSWORD);
         try {
-            driver.findElement(By.xpath(MESSAGE_LOCATOR));
-        } catch (NoSuchElementException e) {
+            ((SelenideElement) this.MESSAGE_LOCATOR.getWrappedElement()).shouldNotBe(Condition.visible);
+        } catch (ElementNotFound e) {
             e.printStackTrace();
         }
-        assertEquals(USER,driver.findElement(By.xpath(USER_FIELD_LOCATOR)).getAttribute("value"));
-        assertEquals("Пароль",driver.findElement(By.xpath(PASSWORD_FIELD_LOCATOR)).getAttribute("placeholder"));
-        }
-
-    @Test
-    void DoNotEnterUserNameAndPassword() {
-        driver.get(URL);
-        driver.findElement(By.xpath(LOG_IN_BUTTON_LOCATOR)).click();
+        loginpage.clickSubmitButton();
         try {
-            driver.findElement(By.xpath(MESSAGE_LOCATOR));
-            fail();
-        } catch (NoSuchElementException ignored) {
+            ((SelenideElement) this.MESSAGE_LOCATOR.getWrappedElement()).shouldBe(Condition.visible);
+        } catch (ElementNotFound e) {
+            e.printStackTrace();
         }
-        assertEquals("https://tt-develop.quality-lab.ru/login", driver.getCurrentUrl());
+        assertEquals(loginpage.INCORRECT_USER_NAME, loginpage.USER_NAME_FIELD_LOCATOR.getAttribute("value"));
+        assertEquals("Пароль", loginpage.PASSWORD_FIELD_LOCATOR.getAttribute("placeholder"));
     }
 
 
+    @Test
+    void DoNotEnterUserNameAndPassword() {
+        loginpage.openWebSite()
+                .clickSubmitButton();
+
+        try {
+            ((SelenideElement) this.MESSAGE_LOCATOR.getWrappedElement()).shouldNotBe(Condition.visible);
+        } catch (ElementNotFound e) {
+            e.printStackTrace();
+        }
+        assertEquals("https://tt-develop.quality-lab.ru/login", WebDriverRunner.url());
+    }
 }
