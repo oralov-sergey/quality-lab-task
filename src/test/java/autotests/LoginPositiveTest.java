@@ -1,6 +1,5 @@
 package autotests;
 
-
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.Test;
 import ru.yandex.qatools.htmlelements.element.TextBlock;

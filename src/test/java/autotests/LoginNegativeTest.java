@@ -6,8 +6,6 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
 import org.junit.jupiter.api.*;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
-
-
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 

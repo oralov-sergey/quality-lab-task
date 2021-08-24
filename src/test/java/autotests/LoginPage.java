@@ -1,13 +1,11 @@
 package autotests;
 
 import ru.yandex.qatools.htmlelements.element.Button;
-import ru.yandex.qatools.htmlelements.element.TextBlock;
 import ru.yandex.qatools.htmlelements.element.TextInput;
-
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
-public class LoginPage extends TestBase {
+public class LoginPage {
     final String URL = "https://tt-develop.quality-lab.ru";
     final TextInput USER_NAME_FIELD_LOCATOR = new TextInput($x("//input[@id='username']"));
     final String INCORRECT_USER_NAME = "TestUser";
