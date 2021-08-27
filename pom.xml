@@ -57,6 +57,11 @@
             <artifactId>htmlelements-java</artifactId>
             <version>1.19</version> <!-- 1.18+ is SELENIUM 3.5.1+ compatible -->
         </dependency>
+        <dependency>
+            <groupId>ru.qatools.commons</groupId>
+            <artifactId>properties</artifactId>
+            <version>2.0.RC3</version>
+        </dependency>
 
     </dependencies>
 

@@ -3,6 +3,7 @@ package autotests;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.Test;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +11,7 @@ public class LoginPositiveTest extends TestBase {
 
     final TextBlock PROFILE_USER_NAME_LOCATOR = new TextBlock($x("(//span[@class='m-card-user__name m--font-weight-500'])"));
     final TextBlock USER_EMAIL_LOCATOR = new TextBlock($x("//span[@class='m-card-user__email m--font-weight-300 m-link']"));
+
 
     @Test
     void initTheAccountAndCheckUser() {
