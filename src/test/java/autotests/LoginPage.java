@@ -1,6 +1,6 @@
 package autotests;
 
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Step;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.TextInput;
 
@@ -20,30 +20,45 @@ public class LoginPage extends TestBase {
     final Button PROFILE_IMG_LOCATOR = new Button($x("(//div[@class='avatarCover'])[1]"));
     final String ACTUAL_USER_EMAIL = "1241242@m.r";
 
+    @Step("Открыть сайт: " + URL)
     public LoginPage openWebSite() {
-        open(props.getUrl());
+        open(props.whichParam(URL));
         return this;
     }
 
-    public LoginPage enterName(String name) {
-        USER_NAME_FIELD_LOCATOR.sendKeys(name);
+    @Step("Ввести корректный логин: " + CORRECT_USER_NAME)
+    public LoginPage enterName() {
+        USER_NAME_FIELD_LOCATOR.sendKeys(props.getCorrectLogin());
         return new LoginPage();
     }
 
-    public LoginPage enterPassword(String password) {
-        PASSWORD_FIELD_LOCATOR.sendKeys(password);
+    @Step("Ввести корректный пароль: " + CORRECT_USER_PASSWORD)
+    public LoginPage enterPassword() {
+        PASSWORD_FIELD_LOCATOR.sendKeys(props.getCorrectPassword());
         return new LoginPage();
     }
 
+    @Step("Ввести некорректный логин: " + INCORRECT_USER_NAME)
+    public LoginPage enterIncorrectName() {
+        USER_NAME_FIELD_LOCATOR.sendKeys(INCORRECT_USER_NAME);
+        return new LoginPage();
+    }
+
+    @Step("Ввести некорректный пароль: " + INCORRECT_PASSWORD)
+    public LoginPage enterIncorrectPassword() {
+        PASSWORD_FIELD_LOCATOR.sendKeys(INCORRECT_PASSWORD);
+        return new LoginPage();
+    }
+
+    @Step("Нажать кнопку входа.")
     public LoginPage clickSubmitButton() {
         LOG_IN_BUTTON_LOCATOR.click();
         return this;
     }
 
+    @Step("Кликнуть по изображению профайла.")
     public LoginPage clickProfileImg() {
         PROFILE_IMG_LOCATOR.click();
         return this;
     }
-
-
 }

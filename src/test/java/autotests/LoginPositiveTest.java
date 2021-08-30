@@ -1,6 +1,8 @@
 package autotests;
 
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Test;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
@@ -14,10 +16,11 @@ public class LoginPositiveTest extends TestBase {
 
 
     @Test
+    @Description("Позитивный тест. Введение корректного логина и пароля.")
     void initTheAccountAndCheckUser() {
         loginpage.openWebSite()
-                .enterName(loginpage.CORRECT_USER_NAME)
-                .enterPassword(loginpage.CORRECT_USER_PASSWORD)
+                .enterName()
+                .enterPassword()
                 .clickSubmitButton();
         assertEquals("https://tt-develop.quality-lab.ru/report/group/edit", WebDriverRunner.url());
         loginpage.clickProfileImg();

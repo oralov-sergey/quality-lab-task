@@ -1,6 +1,6 @@
 package autotests;
 
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Step;
 
 import java.io.FileInputStream;
 import java.io.*;
@@ -8,12 +8,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 
-public class Props extends TestBase {
+public final class Props extends TestBase {
 
     private String url;
     private String login;
     private String password;
-
 
     public String getCorrectLogin() {
         return login;
@@ -40,7 +39,6 @@ public class Props extends TestBase {
         url = readProp("URL");
     }
 
-
     public String readProp(String key) {
         Properties prop = new Properties();
         try {
@@ -51,4 +49,22 @@ public class Props extends TestBase {
         return prop.getProperty(key);
     }
 
+    private String VAR_URL() {
+        String env = System.getenv("u");
+        if (env != null) {
+            return env;
+        }
+        return "none";
+    }
+
+    @Step("Подбор параметра для ввода URL")
+    public String whichParam(String urlAdress) {
+        if (VAR_URL().equals(urlAdress) && (!VAR_URL().equals("none"))) {
+            return VAR_URL();
+        } else if (getUrl().equals(urlAdress)) {
+            return getUrl();
+        } else {
+            return urlAdress;
+        }
+    }
 }

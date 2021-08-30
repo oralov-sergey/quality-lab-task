@@ -1,5 +1,6 @@
 package autotests;
 
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,10 +14,10 @@ public class CalendarTest extends TestBase {
     void initBrowser() {
         super.initBrowser();
         authorization.logInToQualityLabTT();
-
             }
 
     @Test
+    @Description("Проверка календаря. Текущий месяц.")
     void currentMonth() {
         assertEquals(calendarPage.getCurrentWorkMonthAndYear(), calendarPage.getCurrentDate());
         checkDaysInMonth();
@@ -24,6 +25,7 @@ public class CalendarTest extends TestBase {
     }
 
     @Test
+    @Description("Проверка календаря. Смена месяца.")
     void changeMonth() {
         calendarPage.chooseNextMonth();
         checkDaysInMonth();
@@ -31,6 +33,7 @@ public class CalendarTest extends TestBase {
     }
 
     @Test
+    @Description("Проверка календаря. Смена пользователя.")
     void changeWorker() {
         calendarPage.chooseAnotherWorker();
         checkDaysInMonth();
