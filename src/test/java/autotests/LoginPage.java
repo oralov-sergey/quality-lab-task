@@ -61,4 +61,16 @@ public class LoginPage extends TestBase {
         PROFILE_IMG_LOCATOR.click();
         return this;
     }
+
+    @Step("Ввести логин используя параметризацию")
+    public LoginPage enterParamLogin(String login){
+        USER_NAME_FIELD_LOCATOR.sendKeys(login);
+        return this;
+    }
+
+    @Step("Ввести пароль используя параметризацию")
+    public LoginPage enterParamPassword(String password){
+        PASSWORD_FIELD_LOCATOR.sendKeys(password);
+        return this;
+    }
 }

@@ -32,8 +32,8 @@ public class LoginNegativeTest extends TestBase {
         } catch (ElementNotFound e) {
             e.printStackTrace();
         }
-        assertEquals(loginpage.INCORRECT_USER_NAME, loginpage.USER_NAME_FIELD_LOCATOR.getAttribute("value"));
-        assertEquals("Пароль", loginpage.PASSWORD_FIELD_LOCATOR.getAttribute("placeholder"));
+        assertEquals(loginpage.INCORRECT_USER_NAME, loginpage.USER_NAME_FIELD_LOCATOR.getAttribute("value"), "AssertionFailedError");
+        assertEquals("Пароль", loginpage.PASSWORD_FIELD_LOCATOR.getAttribute("placeholder"), "AssertionFailedError");
     }
 
     @Test
@@ -47,6 +47,6 @@ public class LoginNegativeTest extends TestBase {
         } catch (ElementNotFound e) {
             e.printStackTrace();
         }
-        assertEquals("https://tt-develop.quality-lab.ru/login", WebDriverRunner.url());
+        assertEquals("https://tt-develop.quality-lab.ru/login", WebDriverRunner.url(), "AssertionFailedError");
     }
 }

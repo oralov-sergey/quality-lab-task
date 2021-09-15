@@ -17,6 +17,6 @@ public class Authorization extends TestBase {
                 .clickSubmitButton();
         open(CALENDAR_URL);
         ((SelenideElement) calendarPage.CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
-        assertEquals(CALENDAR_URL, WebDriverRunner.url());
+        assertEquals(CALENDAR_URL, WebDriverRunner.url(), "AssertionFailedError");
     }
 }

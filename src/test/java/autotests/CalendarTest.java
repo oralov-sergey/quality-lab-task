@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CalendarTest extends TestBase {
 
 
+
     @Override
     @BeforeEach
     void initBrowser() {
@@ -19,7 +20,7 @@ public class CalendarTest extends TestBase {
     @Test
     @Description("Проверка календаря. Текущий месяц.")
     void currentMonth() {
-        assertEquals(calendarPage.getCurrentWorkMonthAndYear(), calendarPage.getCurrentDate());
+        assertEquals(calendarPage.getCurrentWorkMonthAndYear(), calendarPage.getCurrentDate(), "AssertionFailedError");
         checkDaysInMonth();
 
     }
@@ -40,8 +41,8 @@ public class CalendarTest extends TestBase {
     }
 
     public void checkDaysInMonth() {
-        assertTrue(calendarPage.getWorkingDays() > 0);
-        assertTrue(calendarPage.getWeekends() > 0);
+        assertTrue(calendarPage.getWorkingDays() > 0, "AssertionFailedError");
+        assertTrue(calendarPage.getWeekends() > 0, "AssertionFailedError");
     }
 }
 
