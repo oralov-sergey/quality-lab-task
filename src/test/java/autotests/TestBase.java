@@ -3,13 +3,19 @@ package autotests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.IOException;
 
 @ExtendWith(TestResults.class)
 public class TestBase {
 
+    public WebDriver driver;
     public static LoginPage loginpage;
     public static CalendarPage calendarPage;
     public Authorization authorization;
@@ -19,7 +25,7 @@ public class TestBase {
     static ScreenShooterExtension screenshotemall = new ScreenShooterExtension(true).to("C:\\Users\\79817\\IdeaProjects\\quality-lab-task3\\screenshots");
 
     @BeforeEach
-    void initBrowser() {
+    void initBrowser() throws IOException {
         Configuration.startMaximized = true;
         loginpage = new LoginPage();
         calendarPage = new CalendarPage();
@@ -29,6 +35,8 @@ public class TestBase {
         props.setCorrectPassword();
         props.setCorrectLogin();
         WebDriverRunner.clearBrowserCache();
+
+
     }
 
      /*   @AfterEach

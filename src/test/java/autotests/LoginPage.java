@@ -15,10 +15,10 @@ public class LoginPage extends TestBase {
     final String INCORRECT_PASSWORD = "Password";
     final Button LOG_IN_BUTTON_LOCATOR = new Button($x("//input[@id='_submit']"));
     final TextInput PASSWORD_FIELD_LOCATOR = new TextInput($x("//input[@name='_password']"));
-    final String CORRECT_USER_NAME = "Авто Пользователь";
-    final String CORRECT_USER_PASSWORD = "12345678";
+    final String CORRECT_USER_NAME = "Сергей Оралов";
+    final String CORRECT_USER_PASSWORD = "pwd4hotelRA";
     final Button PROFILE_IMG_LOCATOR = new Button($x("(//div[@class='avatarCover'])[1]"));
-    final String ACTUAL_USER_EMAIL = "1241242@m.r";
+    final String ACTUAL_USER_EMAIL = "fake+518@quality-lab.ru";
 
     @Step("Открыть сайт: " + URL)
     public LoginPage openWebSite() {

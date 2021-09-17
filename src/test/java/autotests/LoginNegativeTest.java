@@ -7,6 +7,9 @@ import com.codeborne.selenide.ex.ElementNotFound;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
+
+import java.io.IOException;
+
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,4 +52,14 @@ public class LoginNegativeTest extends TestBase {
         }
         assertEquals("https://tt-develop.quality-lab.ru/login", WebDriverRunner.url(), "AssertionFailedError");
     }
+
+
+    @Test
+    public void test() throws IOException {
+        authorization.logIntoQualityLabByAPI();
+
+
+    }
+
+
 }

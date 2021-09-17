@@ -17,7 +17,7 @@ public class LoginPositiveTest extends TestBase {
 
     @ParameterizedTest
     @Description("Позитивный тест. Введение корректного логина и пароля.")
-    @CsvSource(value={"Авто Пользователь,12345678", "Тест,Тест"})
+    @CsvSource(value={"Сергей Оралов,pwd4hotelRA", "Тест,Тест"})
     @Step("Вход в аккаунт и проверка пользователя")
     void initTheAccountAndCheckUser(String login, String password) {
         loginpage.openWebSite()
@@ -27,7 +27,7 @@ public class LoginPositiveTest extends TestBase {
         assertEquals("https://tt-develop.quality-lab.ru/report/group/edit", WebDriverRunner.url(), "AssertionFailedError");
         loginpage.clickProfileImg();
 
-        assertTrue(PROFILE_USER_NAME_LOCATOR.getText().contains("Пользователь"), "AssertionFailedError");
+        assertTrue(PROFILE_USER_NAME_LOCATOR.getText().contains("Оралов"), "AssertionFailedError");
         assertEquals(loginpage.ACTUAL_USER_EMAIL, USER_EMAIL_LOCATOR.getText(), "AssertionFailedError");
     }
 }
