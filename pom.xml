@@ -12,6 +12,8 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <aspectj.version>1.8.10</aspectj.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -97,7 +99,8 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <!-- latest version (2.20.1) does not work well with JUnit5 -->
-                <version>2.20.1</version>
+                <version>2.22.2</version>
+
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.platform</groupId>
@@ -121,6 +124,12 @@
                     </dependency>
                 </dependencies>
                 <configuration>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.execution.parallel.enabled=true
+                            junit.jupiter.execution.parallel.mode.default=concurrent
+                        </configurationParameters>
+                    </properties>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -133,8 +142,10 @@
                             <name>allure.results.directory</name>
                             <value>${project.build.directory}/allure-results</value>
                         </property>
+
                     </systemProperties>
                     <testFailureIgnore>true</testFailureIgnore>
+
                 </configuration>
             </plugin>
             <plugin>
@@ -145,7 +156,9 @@
                     <reportVersion>2.13.4</reportVersion>
                     <!--                    <allureDownloadUrl>https://github.com/allure-framework/allure2/releases/download/%s/allure-%s.zip</allureDownloadUrl>-->
                     <!--                    <installDirectory>${project.build.directory}</installDirectory>-->
-                    <allureDownloadUrl>https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.13.4/allure-commandline-2.13.4.zip</allureDownloadUrl>
+                    <allureDownloadUrl>
+                        https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.13.4/allure-commandline-2.13.4.zip
+                    </allureDownloadUrl>
                     <resultsDirectory>allure-results</resultsDirectory>
                 </configuration>
             </plugin>

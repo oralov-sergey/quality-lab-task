@@ -75,12 +75,6 @@ public class Authorization extends TestBase {
 
             driver.manage().addCookie(cookie);
             open(props.getUrl() + "/calendar");
-          //  driver.get(props.getUrl() + "/calendar");
-           // open(props.getUrl() + "/calendar");
-
-
         });
     }
-
-
 }

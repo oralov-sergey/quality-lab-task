@@ -6,9 +6,9 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
-
-import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +44,6 @@ public class LoginNegativeTest extends TestBase {
     void DoNotEnterUserNameAndPassword() {
         loginpage.openWebSite()
                 .clickSubmitButton();
-
         try {
             ((SelenideElement) this.MESSAGE_LOCATOR.getWrappedElement()).shouldNotBe(Condition.visible);
         } catch (ElementNotFound e) {
@@ -52,14 +51,4 @@ public class LoginNegativeTest extends TestBase {
         }
         assertEquals("https://tt-develop.quality-lab.ru/login", WebDriverRunner.url(), "AssertionFailedError");
     }
-
-
-    @Test
-    public void test() throws IOException {
-        authorization.logIntoQualityLabByAPI();
-
-
-    }
-
-
 }

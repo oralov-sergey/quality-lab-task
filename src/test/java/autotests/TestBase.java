@@ -7,15 +7,16 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.parallel.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
 
+
 @ExtendWith(TestResults.class)
 public class TestBase {
 
-    public WebDriver driver;
     public static LoginPage loginpage;
     public static CalendarPage calendarPage;
     public Authorization authorization;
@@ -26,6 +27,7 @@ public class TestBase {
 
     @BeforeEach
     void initBrowser() throws IOException {
+        Configuration.browser = "edge";
         Configuration.startMaximized = true;
         loginpage = new LoginPage();
         calendarPage = new CalendarPage();

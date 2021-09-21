@@ -1,5 +1,6 @@
 import autotests.TestBase;
 import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FirstTest {
@@ -9,57 +10,57 @@ public class FirstTest {
     final int SUM = 2 + 2;
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         System.out.println("FirstTest class started");
     }
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         System.out.println("Test start");
     }
 
     @AfterEach
-    void afterEach(){
+    void afterEach() {
         System.out.println("Test finished");
     }
 
     @AfterAll
-    static void afterAll(){
+    static void afterAll() {
         System.out.println("All tests in FirstTest finished");
     }
 
-        @Test
-        void myTest () {
+    @Test
+    void myTest() {
         System.out.println("My first autotest running");
         assertEquals(EXPECTED_NUMBER_IS_ONE, 1 / 0);
     }
 
-        @Test
-        void test1 () {
+    @Test
+    void test1() {
         System.out.println("Test №1");
         assertEquals(EXPECTED_NUMBER_IS_FOUR, SUM);
     }
 
-        @Test
-        void test2 () {
+    @Test
+    void test2() {
         System.out.println("Test №2");
         assertEquals(EXPECTED_NUMBER_IS_FIVE, SUM);
     }
 
-        @Test
-        void test3 () {
+    @Test
+    void test3() {
         System.out.println("Test №3");
         assertTrue(SUM == EXPECTED_NUMBER_IS_FOUR);
     }
 
-        @Test
-        void test4 () {
+    @Test
+    void test4() {
         System.out.println("Test №4");
         assertTrue(SUM == EXPECTED_NUMBER_IS_FIVE);
     }
 
-        @Test
-        void test5 () {
+    @Test
+    void test5() {
         System.out.println("Test №5");
         assertAll("comparisons",
                 () -> assertEquals(EXPECTED_NUMBER_IS_FOUR, SUM),
@@ -68,6 +69,6 @@ public class FirstTest {
                 () -> assertTrue(SUM == EXPECTED_NUMBER_IS_FIVE)
         );
     }
-    }
+}
 
 

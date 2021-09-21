@@ -2,6 +2,7 @@ package autotests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.Button;
@@ -27,16 +28,20 @@ public class CalendarPage {
     final Button ANOTHER_WORKER_BUTTON = new Button($x("(//span[@class='select2-selection__rendered'])[1]"));
     final Button ANOTHER_WORKER = new Button($x("//li[@class='select2-results__option']"));
 
+
+    @Step("Получение текущих месяца и года.")
     public CalendarPage getCurrentWorkMonthAndYear() {
         CURRENT_MONTH.getText();
         return this;
     }
 
+    @Step("Получение текущей дата.")
     public CalendarPage getCurrentDate() {
         LocalDate.now().format(DateTimeFormatter.ofPattern("LLLL yyyy"));
         return this;
     }
 
+    @Step("Получение рабочих дней.")
     public int getWorkingDays() {
         ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         List<WebElement> days = CALENDAR_TABLE.findElements(By.xpath(CALENDAR_ALL_WORKING_DAYS));
@@ -44,7 +49,7 @@ public class CalendarPage {
         return days.size();
     }
 
-
+    @Step("Получение выходных дней.")
     public int getWeekends() {
         ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         List<WebElement> days = CALENDAR_TABLE.findElements(By.xpath(CALENDAR_ALL_WORKING_DAYS));
@@ -52,6 +57,7 @@ public class CalendarPage {
         return days.size();
     }
 
+    @Step("Выбор следующего месяца.")
     public CalendarPage chooseNextMonth() {
         CHOOSE_MONTH_BUTTON.click();
         NEXT_MONTH.click();
@@ -60,6 +66,7 @@ public class CalendarPage {
         return this;
     }
 
+    @Step("Выбор другого сотрудника.")
     public CalendarPage chooseAnotherWorker() {
         ANOTHER_WORKER_BUTTON.click();
         ANOTHER_WORKER.click();
@@ -67,8 +74,6 @@ public class CalendarPage {
         ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         return this;
     }
-
-
 }
 
 

@@ -7,7 +7,6 @@ import ru.yandex.qatools.htmlelements.element.TextInput;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
-
 public class LoginPage extends TestBase {
     final String URL = "https://tt-develop.quality-lab.ru";
     final TextInput USER_NAME_FIELD_LOCATOR = new TextInput($x("//input[@id='username']"));
