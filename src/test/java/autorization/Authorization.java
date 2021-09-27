@@ -1,12 +1,14 @@
-package autotests;
+package autorization;
 
 import com.codeborne.selenide.*;
+import core.TestBase;
 import io.qameta.allure.Step;
 import okhttp3.*;
 
 import okhttp3.internal.JavaNetCookieJar;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.io.IOException;
 import java.net.CookieManager;
@@ -14,7 +16,6 @@ import java.net.CookiePolicy;
 import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class Authorization extends TestBase {
@@ -29,7 +30,7 @@ public class Authorization extends TestBase {
                 .clickSubmitButton();
         open(CALENDAR_URL);
         ((SelenideElement) calendarPage.CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
-        assertEquals(CALENDAR_URL, WebDriverRunner.url(), "AssertionFailedError");
+        Assert.assertEquals(CALENDAR_URL, WebDriverRunner.url(), "AssertionFailedError");
     }
 
     @Step("Авторизация через API на сайте и переход на страницу календаря: " + CALENDAR_URL)
@@ -58,7 +59,7 @@ public class Authorization extends TestBase {
                 .build();
 
         Response response = client.newCall(request).execute();
-        assertEquals(302, response.code());
+        Assert.assertEquals(302, response.code());
 
         open(props.getUrl() + "/login");
         Selenide.clearBrowserCookies();
@@ -75,12 +76,6 @@ public class Authorization extends TestBase {
 
             driver.manage().addCookie(cookie);
             open(props.getUrl() + "/calendar");
-          //  driver.get(props.getUrl() + "/calendar");
-           // open(props.getUrl() + "/calendar");
-
-
         });
     }
-
-
 }

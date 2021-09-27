@@ -1,4 +1,4 @@
-package autotests;
+package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -17,15 +17,15 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class CalendarPage {
 
-    final Button CHOOSE_MONTH_BUTTON = new Button($x("(//span[@class='input-group-addon'])[1]"));
-    final Button APPLY_CHANGES_BUTTON = new Button($x("//button[@class='btn btn-brand m-btn m-btn--icon btn_do_filter']"));
-    final Button NEXT_MONTH = new Button($x("(//span[@class='month focused active']/following::span)[1]"));
-    final TextBlock CURRENT_MONTH = new TextBlock($x("//span[@id='schedule-month-title']"));
-    final TextBlock CALENDAR_DOWNLOADING_MESSAGE = new TextBlock($x("//div[@id='schedule-overlay']//child::span"));
-    final String CALENDAR_ALL_WORKING_DAYS = "//td[@class='fc-event-container']//child::a";
-    final Table CALENDAR_TABLE = new Table($x("(//div[@class='fc-view fc-month-view fc-basic-view']//child::table)[1]"));
-    final Button ANOTHER_WORKER_BUTTON = new Button($x("(//span[@class='select2-selection__rendered'])[1]"));
-    final Button ANOTHER_WORKER = new Button($x("//li[@class='select2-results__option']"));
+    public final Button CHOOSE_MONTH_BUTTON = new Button($x("(//span[@class='input-group-addon'])[1]"));
+    public final Button APPLY_CHANGES_BUTTON = new Button($x("//button[@class='btn btn-brand m-btn m-btn--icon btn_do_filter']"));
+    public final Button NEXT_MONTH = new Button($x("(//span[@class='month focused active']/following::span)[1]"));
+    public final TextBlock CURRENT_MONTH = new TextBlock($x("//span[@id='schedule-month-title']"));
+    public final TextBlock CALENDAR_DOWNLOADING_MESSAGE = new TextBlock($x("//div[@id='schedule-overlay']//child::span"));
+    public final String CALENDAR_ALL_WORKING_DAYS = "//td[@class='fc-event-container']//child::a";
+    public final Table CALENDAR_TABLE = new Table($x("(//div[@class='fc-view fc-month-view fc-basic-view']//child::table)[1]"));
+    public final Button ANOTHER_WORKER_BUTTON = new Button($x("(//span[@class='select2-selection__rendered'])[1]"));
+    public final Button ANOTHER_WORKER = new Button($x("//li[@class='select2-results__option']"));
 
     public CalendarPage getCurrentWorkMonthAndYear() {
         CURRENT_MONTH.getText();

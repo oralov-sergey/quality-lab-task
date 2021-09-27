@@ -1,5 +1,6 @@
-package autotests;
+package pages;
 
+import core.TestBase;
 import io.qameta.allure.Step;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.TextInput;
@@ -9,16 +10,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 
 public class LoginPage extends TestBase {
-    final String URL = "https://tt-develop.quality-lab.ru";
-    final TextInput USER_NAME_FIELD_LOCATOR = new TextInput($x("//input[@id='username']"));
-    final String INCORRECT_USER_NAME = "TestUser";
-    final String INCORRECT_PASSWORD = "Password";
-    final Button LOG_IN_BUTTON_LOCATOR = new Button($x("//input[@id='_submit']"));
-    final TextInput PASSWORD_FIELD_LOCATOR = new TextInput($x("//input[@name='_password']"));
-    final String CORRECT_USER_NAME = "Сергей Оралов";
-    final String CORRECT_USER_PASSWORD = "pwd4hotelRA";
-    final Button PROFILE_IMG_LOCATOR = new Button($x("(//div[@class='avatarCover'])[1]"));
-    final String ACTUAL_USER_EMAIL = "fake+518@quality-lab.ru";
+    public final String URL = "https://tt-develop.quality-lab.ru";
+    public final TextInput USER_NAME_FIELD_LOCATOR = new TextInput($x("//input[@id='username']"));
+    public final String INCORRECT_USER_NAME = "TestUser";
+    public final String INCORRECT_PASSWORD = "Password";
+    public final Button LOG_IN_BUTTON_LOCATOR = new Button($x("//input[@id='_submit']"));
+    public final TextInput PASSWORD_FIELD_LOCATOR = new TextInput($x("//input[@name='_password']"));
+    public final String CORRECT_USER_NAME = "Сергей Оралов";
+    public final String CORRECT_USER_PASSWORD = "pwd4hotelRA";
+    public final Button PROFILE_IMG_LOCATOR = new Button($x("(//div[@class='avatarCover'])[1]"));
+    public final String ACTUAL_USER_EMAIL = "fake+518@quality-lab.ru";
 
     @Step("Открыть сайт: " + URL)
     public LoginPage openWebSite() {

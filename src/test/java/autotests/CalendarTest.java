@@ -1,33 +1,34 @@
 package autotests;
 
+import core.TestBase;
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Step;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 public class CalendarTest extends TestBase {
 
-
     @Override
-    @BeforeEach
-    void initBrowser() throws IOException {
+    @BeforeMethod
+    public void initBrowser() throws IOException {
         super.initBrowser();
         authorization.logIntoQualityLabByAPI();
     }
 
     @Test
     @Description("Проверка календаря. Текущий месяц.")
+    @Step("Провекрить текущий месяц")
     void currentMonth() {
-        assertEquals(calendarPage.getCurrentWorkMonthAndYear(), calendarPage.getCurrentDate(), "AssertionFailedError");
+        Assert.assertEquals(calendarPage.getCurrentWorkMonthAndYear(), calendarPage.getCurrentDate(), "AssertionFailedError");
         checkDaysInMonth();
     }
 
     @Test
     @Description("Проверка календаря. Смена месяца.")
+    @Step("Сменить месяц")
     void changeMonth() {
         calendarPage.chooseNextMonth();
         checkDaysInMonth();
@@ -35,14 +36,16 @@ public class CalendarTest extends TestBase {
 
     @Test
     @Description("Проверка календаря. Смена пользователя.")
+    @Step("Сменить пользователя")
     void changeWorker() {
         calendarPage.chooseAnotherWorker();
         checkDaysInMonth();
     }
 
+    @Step("Проверка будней и выходных дней")
     public void checkDaysInMonth() {
-        assertTrue(calendarPage.getWorkingDays() > 0, "AssertionFailedError");
-        assertTrue(calendarPage.getWeekends() > 0, "AssertionFailedError");
+        Assert.assertTrue(calendarPage.getWorkingDays() > 0, "AssertionFailedError");
+        Assert.assertTrue(calendarPage.getWeekends() > 0, "AssertionFailedError");
     }
 }
 

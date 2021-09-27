@@ -1,6 +1,7 @@
-import autotests.TestBase;
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
+
 
 public class FirstTest {
     final int EXPECTED_NUMBER_IS_ONE = 1;
@@ -8,66 +9,66 @@ public class FirstTest {
     final int EXPECTED_NUMBER_IS_FIVE = 5;
     final int SUM = 2 + 2;
 
-    @BeforeAll
-    static void beforeAll(){
+    @BeforeClass
+    static void beforeAll() {
         System.out.println("FirstTest class started");
     }
 
-    @BeforeEach
-    void beforeEach(){
+    @BeforeMethod
+    void beforeEach() {
         System.out.println("Test start");
     }
 
-    @AfterEach
-    void afterEach(){
+    @AfterMethod
+    void afterEach() {
         System.out.println("Test finished");
     }
 
-    @AfterAll
-    static void afterAll(){
+    @AfterClass
+    static void afterAll() {
         System.out.println("All tests in FirstTest finished");
     }
 
-        @Test
-        void myTest () {
+    @Test
+    void myTest() {
         System.out.println("My first autotest running");
-        assertEquals(EXPECTED_NUMBER_IS_ONE, 1 / 0);
+        Assert.assertEquals(EXPECTED_NUMBER_IS_ONE, 1 / 0);
     }
 
-        @Test
-        void test1 () {
+    @Test
+    public void test1() {
         System.out.println("Test №1");
-        assertEquals(EXPECTED_NUMBER_IS_FOUR, SUM);
+        Assert.assertEquals(EXPECTED_NUMBER_IS_FOUR, SUM);
     }
 
-        @Test
-        void test2 () {
+    @Test
+    public void test2() {
         System.out.println("Test №2");
-        assertEquals(EXPECTED_NUMBER_IS_FIVE, SUM);
+        Assert.assertEquals(EXPECTED_NUMBER_IS_FIVE, SUM);
     }
 
-        @Test
-        void test3 () {
+    @Test
+    public void test3() {
         System.out.println("Test №3");
-        assertTrue(SUM == EXPECTED_NUMBER_IS_FOUR);
+        Assert.assertTrue(SUM == EXPECTED_NUMBER_IS_FOUR);
     }
 
-        @Test
-        void test4 () {
+    @Test
+    public void test4() {
         System.out.println("Test №4");
-        assertTrue(SUM == EXPECTED_NUMBER_IS_FIVE);
+        Assert.assertTrue(SUM == EXPECTED_NUMBER_IS_FIVE);
     }
 
-        @Test
-        void test5 () {
+    @Test
+    public void test5() {
+        SoftAssert soft = new SoftAssert();
         System.out.println("Test №5");
-        assertAll("comparisons",
-                () -> assertEquals(EXPECTED_NUMBER_IS_FOUR, SUM),
-                () -> assertEquals(EXPECTED_NUMBER_IS_FIVE, SUM),
-                () -> assertTrue(SUM == EXPECTED_NUMBER_IS_FOUR),
-                () -> assertTrue(SUM == EXPECTED_NUMBER_IS_FIVE)
-        );
+        soft.assertEquals(EXPECTED_NUMBER_IS_FOUR, SUM);
+        soft.assertEquals(EXPECTED_NUMBER_IS_FIVE, SUM);
+        soft.assertTrue(SUM == EXPECTED_NUMBER_IS_FOUR, "true");
+        soft.assertTrue(SUM == EXPECTED_NUMBER_IS_FIVE, "false");
+        soft.assertAll();
     }
-    }
+}
 
 

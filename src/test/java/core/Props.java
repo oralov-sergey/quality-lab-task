@@ -1,5 +1,6 @@
-package autotests;
+package core;
 
+import core.TestBase;
 import io.qameta.allure.Step;
 
 import java.io.FileInputStream;
