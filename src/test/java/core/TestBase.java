@@ -1,17 +1,19 @@
 package core;
 
 import autorization.Authorization;
-import com.codeborne.selenide.testng.ScreenShooter;
+import com.codeborne.selenide.Screenshots;
+import com.google.common.io.Files;
+import io.qameta.allure.Attachment;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import pages.CalendarPage;
 import pages.LoginPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 
+import java.io.File;
 import java.io.IOException;
 
-@Listeners(ScreenShooter.class)
 public class TestBase {
 
     public static LoginPage loginpage;
@@ -30,11 +32,25 @@ public class TestBase {
         props.setCorrectPassword();
         props.setCorrectLogin();
         WebDriverRunner.clearBrowserCache();
+
     }
 
-     /*   @AfterEach
-    void closeWebDrive() throws IOException {
-     //   WebDriverRunner.closeWebDriver();
 
-    }*/
+    @Attachment(type = "image/png")
+    public byte[] takeScreenshot() throws IOException {
+        File screenshot = Screenshots.getLastScreenshot();
+        return screenshot == null ? null :  Files.toByteArray(screenshot);
+    }
+
+    @AfterMethod
+    public void testFailed() {
+        try {
+            takeScreenshot();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+

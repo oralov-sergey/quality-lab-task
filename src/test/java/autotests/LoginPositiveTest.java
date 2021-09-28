@@ -11,7 +11,6 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-
 public class LoginPositiveTest extends TestBase {
 
     final TextBlock PROFILE_USER_NAME_LOCATOR = new TextBlock($x("(//span[@class='m-card-user__name m--font-weight-500'])"));
@@ -20,7 +19,7 @@ public class LoginPositiveTest extends TestBase {
     @Description("Позитивный тест. Введение корректного логина и пароля.")
     @Step("Вход в аккаунт и проверка пользователя")
     @Test
-    @Parameters ({"login,password"})
+    @Parameters ({"login", "pass"})
   public void initTheAccountAndCheckUser(String login, String password) {
         loginpage.openWebSite()
                 .enterParamLogin(login)
