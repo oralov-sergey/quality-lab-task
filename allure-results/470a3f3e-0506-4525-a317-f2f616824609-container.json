@@ -1,0 +1,1 @@
+{"uuid":"470a3f3e-0506-4525-a317-f2f616824609","name":"autotests.GetHolidaysTest.setup","children":["a2a742dc-f738-4c40-a45d-135a2cbe161a"],"description":"","befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1633348486891,"stop":1633348487524}],"afters":[],"start":1633348486891,"stop":1633348487524}

@@ -1,5 +1,6 @@
 package pages;
 
+import core.PropertiesReader;
 import core.TestBase;
 import io.qameta.allure.Step;
 import ru.yandex.qatools.htmlelements.element.Button;
@@ -7,7 +8,6 @@ import ru.yandex.qatools.htmlelements.element.TextInput;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
-
 
 public class LoginPage extends TestBase {
     public final String URL = "https://tt-develop.quality-lab.ru";
@@ -23,19 +23,19 @@ public class LoginPage extends TestBase {
 
     @Step("Открыть сайт: " + URL)
     public LoginPage openWebSite() {
-        open(props.whichParam(URL));
+        open(PropertiesReader.baseUrl);
         return this;
     }
 
     @Step("Ввести корректный логин: " + CORRECT_USER_NAME)
     public LoginPage enterName() {
-        USER_NAME_FIELD_LOCATOR.sendKeys(props.getCorrectLogin());
+        USER_NAME_FIELD_LOCATOR.sendKeys(PropertiesReader.correct_login);
         return new LoginPage();
     }
 
     @Step("Ввести корректный пароль: " + CORRECT_USER_PASSWORD)
     public LoginPage enterPassword() {
-        PASSWORD_FIELD_LOCATOR.sendKeys(props.getCorrectPassword());
+        PASSWORD_FIELD_LOCATOR.sendKeys(PropertiesReader.correct_password);
         return new LoginPage();
     }
 
@@ -64,13 +64,13 @@ public class LoginPage extends TestBase {
     }
 
     @Step("Ввести логин используя параметризацию")
-    public LoginPage enterParamLogin(String login){
+    public LoginPage enterParamLogin(String login) {
         USER_NAME_FIELD_LOCATOR.sendKeys(login);
         return this;
     }
 
     @Step("Ввести пароль используя параметризацию")
-    public LoginPage enterParamPassword(String password){
+    public LoginPage enterParamPassword(String password) {
         PASSWORD_FIELD_LOCATOR.sendKeys(password);
         return this;
     }

@@ -1,6 +1,7 @@
 package autorization;
 
 import com.codeborne.selenide.*;
+import core.PropertiesReader;
 import core.TestBase;
 import io.qameta.allure.Step;
 import okhttp3.*;
@@ -17,14 +18,13 @@ import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.*;
 
-
 public class Authorization extends TestBase {
     final String CALENDAR_URL = "https://tt-develop.quality-lab.ru/calendar/";
     final String COOKIE = "PHPSESSID=6d7e7a307156309ec41a3f21508d7aa0";
 
     @Step("Авторизация на сайте и переход на страницу календаря: " + CALENDAR_URL)
     public void logInToQualityLabTT() {
-        open(props.whichParam(loginpage.URL));
+        open(PropertiesReader.baseUrl);
         loginpage.enterName()
                 .enterPassword()
                 .clickSubmitButton();
@@ -53,7 +53,7 @@ public class Authorization extends TestBase {
                 .build();
 
         Request request = new Request.Builder()
-                .url(props.getUrl() + "/login_check")
+                .url(PropertiesReader.baseUrl + "/login_check")
                 .addHeader("cookie", COOKIE)
                 .post(formBody)
                 .build();
@@ -61,7 +61,7 @@ public class Authorization extends TestBase {
         Response response = client.newCall(request).execute();
         Assert.assertEquals(302, response.code());
 
-        open(props.getUrl() + "/login");
+        open(PropertiesReader.baseUrl + "/login");
         Selenide.clearBrowserCookies();
         WebDriver driver = WebDriverRunner.getWebDriver();
 
@@ -75,7 +75,7 @@ public class Authorization extends TestBase {
                     null);
 
             driver.manage().addCookie(cookie);
-            open(props.getUrl() + "/calendar");
+            open(PropertiesReader.baseUrl + "/calendar");
         });
     }
 }

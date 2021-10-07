@@ -14,7 +14,6 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-
 public class CalendarPage {
 
     public final Button CHOOSE_MONTH_BUTTON = new Button($x("(//span[@class='input-group-addon'])[1]"));
@@ -38,7 +37,7 @@ public class CalendarPage {
     }
 
     public int getWorkingDays() {
-        ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
+        ((SelenideElement) CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         List<WebElement> days = CALENDAR_TABLE.findElements(By.xpath(CALENDAR_ALL_WORKING_DAYS));
         days.removeIf(day -> day.getCssValue("background-color").equals("rgba(234, 234, 234, 1)"));
         return days.size();
@@ -46,7 +45,7 @@ public class CalendarPage {
 
 
     public int getWeekends() {
-        ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
+        ((SelenideElement) CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         List<WebElement> days = CALENDAR_TABLE.findElements(By.xpath(CALENDAR_ALL_WORKING_DAYS));
         days.removeIf(day -> day.getCssValue("background-color").equals("rgba(52, 191, 163, 1)"));
         return days.size();
@@ -56,7 +55,7 @@ public class CalendarPage {
         CHOOSE_MONTH_BUTTON.click();
         NEXT_MONTH.click();
         APPLY_CHANGES_BUTTON.click();
-        ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
+        ((SelenideElement) CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         return this;
     }
 
@@ -64,7 +63,7 @@ public class CalendarPage {
         ANOTHER_WORKER_BUTTON.click();
         ANOTHER_WORKER.click();
         APPLY_CHANGES_BUTTON.click();
-        ((SelenideElement)CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
+        ((SelenideElement) CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
         return this;
     }
 

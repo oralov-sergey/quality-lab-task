@@ -6,17 +6,15 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
 import core.TestBase;
 import io.qameta.allure.Description;
-
 import io.qameta.allure.Step;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
-import java.io.IOException;
+import static com.codeborne.selenide.Selenide.$x;
 
-import static com.codeborne.selenide.Selenide.*;
-
-
+@Listeners({core.TestListener.class})
 public class LoginNegativeTest extends TestBase {
     private final TextBlock MESSAGE_LOCATOR = new TextBlock($x("(//div[contains(.,'Invalid credentials.')])[8]"));
 
@@ -47,7 +45,7 @@ public class LoginNegativeTest extends TestBase {
     @Test
     @Description("Негативный тест. Пароль и логин не вводится.")
     @Step("Попытка авторизоваться не вводя логин и пароль")
-    void DoNotEnterUserNameAndPassword() {
+    void doNotEnterUserNameAndPassword() {
         loginpage.openWebSite()
                 .clickSubmitButton();
 
@@ -58,9 +56,4 @@ public class LoginNegativeTest extends TestBase {
         }
         Assert.assertEquals("https://tt-develop.quality-lab.ru/login", WebDriverRunner.url(), "AssertionFailedError");
     }
-
-
-
-
-
 }

@@ -5,10 +5,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+@Listeners({ core.TestListener.class})
 public class CalendarTest extends TestBase {
 
     @Override
@@ -18,7 +20,7 @@ public class CalendarTest extends TestBase {
         authorization.logIntoQualityLabByAPI();
     }
 
-    @Test
+      @Test
     @Description("Проверка календаря. Текущий месяц.")
     @Step("Провекрить текущий месяц")
     void currentMonth() {
