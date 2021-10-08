@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="2" name="MySuite" parallel="tests" thread-count="4">
+
+
+        <test name="PositiveTest_1">
+            <parameter name="login" value="Сергей Оралов"/>
+            <parameter name="pass" value="pwd4hotelRA"/>
+            <classes>
+                <class name="autotests.LoginPositiveTest"/>
+            </classes>
+        </test>
+
+        <test name="PositiveTest_2">
+            <parameter name="login" value="Тест"/>
+            <parameter name="pass" value="Тест"/>
+            <classes>
+                <class name="autotests.LoginPositiveTest"/>
+            </classes>
+        </test>
+
+        <test name="NegativeTest">
+            <classes>
+                <class name="autotests.LoginNegativeTest"/>
+            </classes>
+        </test>
+
+        <test name="CalendarTest" >
+            <classes>
+                <class name="autotests.CalendarTest"/>
+            </classes>
+        </test>
+
+
+</suite>
