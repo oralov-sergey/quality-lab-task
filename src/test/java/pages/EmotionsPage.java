@@ -18,13 +18,13 @@ public class EmotionsPage extends TestBase {
     public static final SelenideElement POP_UP_CANCEL_BUTTON = $x("(//button[@class='btn btn-secondary'])[3]");
     public static final String POP_UP_TEXT = "Вы хотите залогировать больше или меньше 8 часов, которые по графику запланированы у вас на сегодня";
 
-    @Step("Навести на блок меню 'Отчёты'")
+    @Step("Навести на блок меню 'Отчёты'.")
     public EmotionsPage pointToReportMenuIcon() {
         REPORT_MENU_BUTTON.hover();
         return this;
     }
 
-    @Step("Выбрать и кликнуть по элементу")
+    @Step("Выбрать и кликнуть по элементу.")
     public EmotionsPage clickTheButton(SelenideElement button){
         button.click();
         return this;
