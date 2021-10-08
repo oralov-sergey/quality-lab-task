@@ -25,7 +25,7 @@ public class CalendarPage {
     public final String CALENDAR_ALL_WORKING_DAYS = "//td[@class='fc-event-container']//child::a";
     public final Table CALENDAR_TABLE = new Table($x("(//div[@class='fc-view fc-month-view fc-basic-view']//child::table)[1]"));
     public final Button ANOTHER_WORKER_BUTTON = new Button($x("(//span[@class='select2-selection__rendered'])[1]"));
-    public final Button ANOTHER_WORKER = new Button($x("//li[@class='select2-results__option']"));
+    public final Button ANOTHER_WORKER = new Button($x("//li[@class='select2-results__option']/following::li[1]"));
 
     public CalendarPage getCurrentWorkMonthAndYear() {
         CURRENT_MONTH.getText();
