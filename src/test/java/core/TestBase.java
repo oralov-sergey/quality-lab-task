@@ -1,16 +1,19 @@
 package core;
 
 import autorization.Authorization;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Screenshots;
-import com.google.common.io.Files;
+import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Attachment;
-import org.testng.annotations.AfterMethod;
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.BeforeMethod;
 import pages.CalendarPage;
+import pages.EmotionsPage;
 import pages.LoginPage;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,36 +22,31 @@ public class TestBase {
     public static LoginPage loginpage;
     public static CalendarPage calendarPage;
     public Authorization authorization;
-    public static Props props;
+    public static PropertiesReader propertiesReader;
+    public static EmotionsPage emotionsPage;
 
     @BeforeMethod
-   public void initBrowser() throws IOException {
+    public void initBrowser() throws IOException {
         Configuration.startMaximized = true;
         loginpage = new LoginPage();
         calendarPage = new CalendarPage();
-        props = new Props();
+        propertiesReader = new PropertiesReader();
         this.authorization = new Authorization();
-        props.setUrl();
-        props.setCorrectPassword();
-        props.setCorrectLogin();
+        emotionsPage = new EmotionsPage();
         WebDriverRunner.clearBrowserCache();
-
     }
-
 
     @Attachment(type = "image/png")
     public byte[] takeScreenshot() throws IOException {
-        File screenshot = Screenshots.getLastScreenshot();
-        return screenshot == null ? null :  Files.toByteArray(screenshot);
-    }
+        File screenshot = Screenshots.takeScreenShotAsFile();
+        FileUtils.copyFile(screenshot, new File("target\\allure-results\\screenshots\\" + screenshot.getName()));
+        File file = new File(String.valueOf(screenshot));
+        BufferedImage bufferedImage = ImageIO.read(file);
 
-    @AfterMethod
-    public void testFailed() {
-        try {
-            takeScreenshot();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        byte[] image = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", bos);
+        return image = bos.toByteArray();
     }
 }
 

@@ -1,5 +1,5 @@
 target
 *.iml
 *.idea
-#Allure
+#Allur
 **/.allure
