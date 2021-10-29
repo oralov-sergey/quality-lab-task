@@ -86,7 +86,7 @@ public class GetHolidaysTest extends TestBase {
         List<HolidayItem> items =
                 jsonPath.getList("response.items", HolidayItem.class);
         boolean DAY_TYPE = items.stream().allMatch((x) -> Objects.equals(x.getType(), "short_day"));
-        Assert.assertTrue(DAY_TYPE, "не найдено дней с типом 'short_day'");
+        Assert.assertTrue(DAY_TYPE, "AssertionFailedError: There are no days with type 'short_day'");
     }
 
     @Description("Тест API. Проверка календаря на сокращенные дни. Параметр: 'short_day'")
@@ -104,7 +104,7 @@ public class GetHolidaysTest extends TestBase {
         List<HolidayItem> items =
                 jsonPath.getList("response.items", HolidayItem.class);
         boolean DAY_TYPE = items.stream().allMatch((x) -> Objects.equals(x.getType(), "holy_day"));
-        Assert.assertTrue(DAY_TYPE, "не найдено дней с типом 'holy_day'");
+        Assert.assertTrue(DAY_TYPE, "AssertionFailedError: There are no days with type 'holy_day'");
     }
 
     @Description("Тест API. Проверка календаря на год, непристуствующий в календаре. Параметр: '1000'. Негативный тест")
@@ -122,7 +122,7 @@ public class GetHolidaysTest extends TestBase {
         List<HolidayItem> items =
                 jsonPath.getList("response.items", HolidayItem.class);
         boolean DAY_COUNT = items.stream().allMatch((x) -> Objects.equals(x.getCount(), 0));
-        Assert.assertFalse(DAY_COUNT, "не найдено дней в 1000-м году");
+        Assert.assertFalse(DAY_COUNT, "AssertionFailedError: There are no days in he year 1000'");
     }
 
     @Description("Тест API. Проверка календаря на сверхурочную работу. Параметр: 'over_time'. Негативный тест. day_type может принимать только два значения.")
@@ -139,7 +139,7 @@ public class GetHolidaysTest extends TestBase {
         List<HolidayItem> items =
                 jsonPath.getList("response.items", HolidayItem.class);
         boolean DAY_COUNT = items.stream().allMatch((x) -> Objects.equals(x.getCount(), 0));
-        Assert.assertFalse(DAY_COUNT, "не найдено дней с типом 'over_time'");
+        Assert.assertFalse(DAY_COUNT, "AssertionFailedError: There are no days with type 'over_time'");
     }
 }
 

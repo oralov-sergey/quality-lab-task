@@ -6,7 +6,7 @@
            </listeners>
 
 
-    <test name="PositiveTest_1">
+    <test name="PositiveTest_1" parallel="methods">
         <parameter name="login" value="Сергей Оралов"/>
         <parameter name="pass" value="pwd4hotelRA"/>
         <classes>
@@ -14,7 +14,7 @@
         </classes>
     </test>
 
-    <test name="PositiveTest_2">
+    <test name="PositiveTest_2" parallel="methods">
         <parameter name="login" value="Тест"/>
         <parameter name="pass" value="Тест"/>
         <classes>

@@ -41,10 +41,9 @@
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>5.23.3</version>
+            <version>5.22.3</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>ru.yandex.qatools.htmlelements</groupId>
             <artifactId>htmlelements-java</artifactId>

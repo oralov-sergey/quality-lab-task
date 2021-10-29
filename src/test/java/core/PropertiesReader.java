@@ -25,6 +25,15 @@ public class PropertiesReader extends TestBase {
     @Property("CORRECT_PASSWORD")
     public static String correct_password;
 
+    @Property("INCORRECT_LOGIN")
+    public static String incorrect_login;
+
+    @Property("INCORRECT_PASSWORD")
+    public static String incorrect_password;
+
+    @Property("COOKIE")
+    public static String cookie;
+
     public PropertiesReader() {
         PropertyLoader.newInstance().populate(this);
     }

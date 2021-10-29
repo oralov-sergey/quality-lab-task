@@ -89,8 +89,8 @@ public class EmotionsTest extends TestBase {
                 .clickTheButton(TODAY_REPORT_BUTTON)
                 .clickTheButton(data);
 
-        Assert.assertTrue((EXPECTED_POP_UP.shouldBe(Condition.appear)).isDisplayed());
-        Assert.assertEquals(POP_UP_TITLE_SELECTOR.getText(), POP_UP_TEXT);
+        Assert.assertTrue((EXPECTED_POP_UP.shouldBe(Condition.appear)).isDisplayed(), "AssertionFailedError: PopUp is not appeared or displayed");
+        Assert.assertEquals(POP_UP_TITLE_SELECTOR.getText(), POP_UP_TEXT, "AssertionFailedError: The text is not the same");
 
         emotionsPage.clickTheButton(POP_UP_CANCEL_BUTTON);
     }

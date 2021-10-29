@@ -20,21 +20,21 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class Authorization extends TestBase {
     final String CALENDAR_URL = "https://tt-develop.quality-lab.ru/calendar/";
-    final String COOKIE = "PHPSESSID=6d7e7a307156309ec41a3f21508d7aa0";
 
     @Step("Авторизация на сайте и переход на страницу календаря: " + CALENDAR_URL)
     public void logInToQualityLabTT() {
         open(PropertiesReader.baseUrl);
-        loginpage.enterName()
-                .enterPassword()
+        loginpage.enterData(loginpage.USER_NAME_FIELD_LOCATOR, PropertiesReader.correct_login)
+                .enterData(loginpage.PASSWORD_FIELD_LOCATOR, PropertiesReader.incorrect_password)
                 .clickSubmitButton();
         open(CALENDAR_URL);
-        ((SelenideElement) calendarPage.CALENDAR_DOWNLOADING_MESSAGE.getWrappedElement()).shouldNotBe(Condition.visible);
+        //calendarPage.CALENDAR_DOWNLOADING_MESSAGE
+        calendarPage.getCalendarDownloadingMessageElement().shouldNotBe(Condition.visible);
         Assert.assertEquals(CALENDAR_URL, WebDriverRunner.url(), "AssertionFailedError");
     }
 
     @Step("Авторизация через API на сайте и переход на страницу календаря: " + CALENDAR_URL)
-    public void logIntoQualityLabByAPI() throws IOException {
+    public void logIntoQualityLabByAPI(String expectedUrl) throws IOException {
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
         JavaNetCookieJar cookieJar = new JavaNetCookieJar(cookieManager);
@@ -42,7 +42,7 @@ public class Authorization extends TestBase {
         OkHttpClient client = new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
                 .followRedirects(false)
-                .readTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
                 .build();
 
         RequestBody formBody = new FormBody.Builder()
@@ -54,7 +54,7 @@ public class Authorization extends TestBase {
 
         Request request = new Request.Builder()
                 .url(PropertiesReader.baseUrl + "/login_check")
-                .addHeader("cookie", COOKIE)
+                .addHeader("cookie", PropertiesReader.cookie)
                 .post(formBody)
                 .build();
 
@@ -75,7 +75,7 @@ public class Authorization extends TestBase {
                     null);
 
             driver.manage().addCookie(cookie);
-            open(PropertiesReader.baseUrl + "/calendar");
+            open(expectedUrl);
         });
     }
 }

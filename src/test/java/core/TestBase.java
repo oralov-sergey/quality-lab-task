@@ -19,20 +19,25 @@ import java.io.IOException;
 
 public class TestBase {
 
-    public static LoginPage loginpage;
-    public static CalendarPage calendarPage;
+    public LoginPage loginpage;
+    public CalendarPage calendarPage;
     public Authorization authorization;
-    public static PropertiesReader propertiesReader;
-    public static EmotionsPage emotionsPage;
+    public PropertiesReader propertiesReader;
+    public EmotionsPage emotionsPage;
+    public CommonActions commonActions;
+    public AccauntPage accountPage;
 
     @BeforeMethod
     public void initBrowser() throws IOException {
         Configuration.startMaximized = true;
+        Configuration.timeout = 15000;
         loginpage = new LoginPage();
         calendarPage = new CalendarPage();
         propertiesReader = new PropertiesReader();
         this.authorization = new Authorization();
         emotionsPage = new EmotionsPage();
+        commonActions = new CommonActions();
+        accountPage = new AccauntPage();
         WebDriverRunner.clearBrowserCache();
     }
 
